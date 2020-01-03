@@ -1,7 +1,7 @@
 # vagrant_csr1000v
 Spinning csr1000v router using vagrant with virtualbox as provisioner. 
 
-We need:
+Whate we need:
   - csr1000v iso image.
   - installed vagrant
   - installed virtual box
@@ -39,4 +39,25 @@ Type in shell:
     cisco-csr1000v-box (virtualbox, 0)
       (vagrant box should be created)
   Step 3: 
+    Now we need to create "Vagrantfile" in our project directory by creating it in any text editor or by typing in shell:
+      vagrant init
+    then edit Vagrantfile in nano for example. 
     
+Vagrant.configure("2") do |config|
+  
+  config.vm.define "rtr1" do |rtr1|
+      rtr1.vm.box = "cisco-csr1000v-box"
+      rtr1.vm.boot_timeout = 1
+      rtr1.vm.hostname = "rtr1"
+      rtr1.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
+      rtr1.vm.network "public_network",use_dhcp_assigned_default_route: true, bridge: "enp0s3: Ethernet"
+      rtr1.vm.network "private_network", ip: "192.168.100.1"
+      rtr1.vm.network "private_network",  ip: "192.168.200.1"
+      rtr1.vm.provider "virtualbox" do |vb|
+        vb.name = "rtr1"
+        vb.memory = "3072"
+        vb.cpus = 2
+      end
+   end
+end
+
