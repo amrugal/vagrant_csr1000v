@@ -18,6 +18,7 @@ Step 1:
 Step 2: 
 Make new directory for vagrant project for example: Vagrant in your Home directory for example and Vagrant/Boxes for package. 
 Type in shell: 
+```bash
   vagrant package --base csr1000v --output /home/adrian/Vagrant/Boxes/
     ==> csr1000v: Exporting VM...
     ==> csr1000v: Compressing package to: /home/adrian/Vagrant/boxes/cisco-csr1000v
@@ -28,8 +29,9 @@ Type in shell:
     drwxrwxr-x 2 adrian adrian 4.0K Jan  3 20:22 ./
     drwxrwxr-x 4 adrian adrian 4.0K Jan  3 22:45 ../
     -rw-rw-r-- 1 adrian adrian 1.1G Jan  3 20:24 cisco-csr1000v 
-      (vagrant package for csr should be created) 
-      
+```
+ (vagrant package for csr should be created) 
+```bash     
   vagrant box add /home/adrian/Vagrant/boxes/cisco-csr1000v --name cisco-csr1000v-box
     ==> box: Box file was not detected as metadata. Adding it directly...
     ==> box: Adding box 'cisco-csr1000b-box' (v0) for provider: 
@@ -37,8 +39,10 @@ Type in shell:
     ==> box: Successfully added box 'cisco-csr1000b-box' (v0) for 'virtualbox'!
   vagrant box list
     cisco-csr1000v-box (virtualbox, 0)
-      (vagrant box should be created)
-  Step 3: 
+```
+    
+(vagrant box should be created)
+Step 3: 
     Now we need to create "Vagrantfile" in our project directory by creating it in any text editor or by typing in shell:
       vagrant init
     then edit Vagrantfile in nano for example. 
