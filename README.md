@@ -42,7 +42,7 @@ Type in shell:
     Now we need to create "Vagrantfile" in our project directory by creating it in any text editor or by typing in shell:
       vagrant init
     then edit Vagrantfile in nano for example. 
-    
+```ruby    
 Vagrant.configure("2") do |config|
   
   config.vm.define "rtr1" do |rtr1|
@@ -60,9 +60,9 @@ Vagrant.configure("2") do |config|
       end
    end
 end
-
+```
 Basic explanation: 
-
+```ruby
 Vagrant.configure("2") do |config|
   
   config.vm.define "rtr1" do |rtr1|
@@ -80,3 +80,4 @@ Vagrant.configure("2") do |config|
       end
    end
 end
+```
