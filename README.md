@@ -90,7 +90,6 @@ end
 Step 4: 
   Type: 
 ```bash
-  //#d73a49
 vagrant up
 ```
 output: 
@@ -127,7 +126,8 @@ Bringing machine 'rtr1' up with 'virtualbox' provider...
     rtr1: SSH address: 127.0.0.1:2201
     rtr1: SSH username: vagrant
     rtr1: SSH auth method: private key
-Timed out while waiting for the machine to boot. This means that
+```
+`Timed out while waiting for the machine to boot. This means that
 Vagrant was unable to communicate with the guest machine within
 the configured ("config.vm.boot_timeout" value) time period.
 
@@ -143,4 +143,4 @@ as well.
 
 If the box appears to be booting properly, you may want to increase
 the timeout ("config.vm.boot_timeout") value.
-```
+`
