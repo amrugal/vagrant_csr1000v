@@ -35,19 +35,13 @@ We can check file presence and size:
 ```bash
   ll -h /home/adrian/Vagrant/boxes/ 
 ```
+Vagrant package named cisco-csr1000v should be created: 
 ```bash
     total 1.1G
     drwxrwxr-x 2 adrian adrian 4.0K Jan  3 20:22 ./
     drwxrwxr-x 4 adrian adrian 4.0K Jan  3 22:45 ../
     -rw-rw-r-- 1 adrian adrian 1.1G Jan  3 20:24 cisco-csr1000v
 ```
- (vagrant package named cisco-csr1000v should be created) 
- 
- 
- 
- 
- 
- 
  Then type: 
 ```bash     
   vagrant box add /home/adrian/Vagrant/boxes/cisco-csr1000v --name cisco-csr1000v-box
@@ -58,8 +52,8 @@ We can check file presence and size:
   vagrant box list
     cisco-csr1000v-box (virtualbox, 0)
 ```
-    
 (vagrant box should be created)
+
 Step 3: 
     Now we need to create "Vagrantfile" in our project directory by creating it in any text editor or by typing in shell:
       vagrant init
