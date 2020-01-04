@@ -6,23 +6,23 @@ What we need:
   - installed vagrant
   - installed virtual box
 
-Step 1:
-  #In virtualbox gui click new machine.\
-  #Set Name: csr1000v (for example). \
-  #Set Type: Linux. \
-  #Set Version: Other Linux (64-bit). \
+Step 1:\
+  In virtualbox gui click new machine.\
+  Set Name: csr1000v (for example). \
+  Set Type: Linux. \
+  Set Version: Other Linux (64-bit). \
   \
-  #Choose Create virtual hard disk now > VDI (VIrtualBox Disk Image) > Fixed size > Default disk name and location > Size 8GB.\
+  Choose Create virtual hard disk now > VDI (VIrtualBox Disk Image) > Fixed size > Default disk name and location > Size 8GB.\
   \
-  #Right click on created csr machine > Settings... > Serial Ports > Thick Enable Serial Port > Port Mode: Disconnected. \
+  Right click on created csr machine > Settings... > Serial Ports > Thick Enable Serial Port > Port Mode: Disconnected. \
   \
-  #Start your machine and point to csr iso image if asked and not mounted before spinning it up in Settings > Storage. \
+  Start your machine and point to csr iso image if asked and not mounted before spinning it up in Settings > Storage. \
   \
-  #CSR1000v boot time can be long, 15 minutes for example. \
+  CSR1000v boot time can be long, 15 minutes for example. \
   \
-  #Shut it down and be sure the iso image is unmounted from optical drive. \
+  Shut it down and be sure the iso image is unmounted from optical drive. \
   \
-Step 2: 
+Step 2: \
   Make new directories, one for vagrant project and second for storing vagrant package Vagrant/Boxes for package. 
   ```bash
     mkdir /home/adrian/Vagrant/
@@ -70,7 +70,7 @@ Step 2:
   ```
   (vagrant box should be created)
 
-Step 3: 
+Step 3: \
     Now we need to create "Vagrantfile" in our project directory by creating it in any text editor or by typing in shell:
     vagrant init
     then edit Vagrantfile in nano for example. 
@@ -93,7 +93,7 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
-Step 4: 
+Step 4: \
   Type: 
 ```bash
 vagrant up
@@ -149,7 +149,7 @@ If we type wrong localhost interface name for bridged network there will be opti
     rtr1: Which interface should the network bridge to? 1
 ```
 Now wait for end of csr booting, even 15 minutes. 
-Step 5:
+Step 5: \
   Machines started by vagrant should be vissible in VirtualBox as new instances. 
   Login to csr console via VirtualBox GUI and set basic ssh configuration to allow connections for vagrant and other remotes. 
   ```bash
