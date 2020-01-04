@@ -39,9 +39,14 @@ We can check file presence and size:
     total 1.1G
     drwxrwxr-x 2 adrian adrian 4.0K Jan  3 20:22 ./
     drwxrwxr-x 4 adrian adrian 4.0K Jan  3 22:45 ../
-    -rw-rw-r-- 1 adrian adrian 1.1G Jan  3 20:24 cisco-csr1000v 
+    -rw-rw-r-- 1 adrian adrian 1.1G Jan  3 20:24 cisco-csr1000v
 ```
  (vagrant package named cisco-csr1000v should be created) 
+ 
+ 
+ 
+ 
+ 
  
  Then type: 
 ```bash     
