@@ -99,20 +99,6 @@ Bringing machine 'rtr1' up with 'virtualbox' provider...
 ==> rtr1: Matching MAC address for NAT networking...
 ==> rtr1: Setting the name of the VM: rtr1
 ==> rtr1: Clearing any previously set network interfaces...
-==> rtr1: Specific bridge 'en0: Ethernet' not found. You may be asked to specify
-==> rtr1: which network to bridge to.
-==> rtr1: Available bridged network interfaces:
-1) enp0s3
-2) docker0
-==> rtr1: When choosing an interface, it is usually the one that is
-==> rtr1: being used to connect to the internet.
-    rtr1: Which interface should the network bridge to?       enp0s3	
-    rtr1: Which interface should the network bridge to? enp0s3
-    rtr1: Which interface should the network bridge to? 
-    rtr1: Which interface should the network bridge to? 
-    rtr1: Which interface should the network bridge to? 
-    rtr1: Which interface should the network bridge to? 
-    rtr1: Which interface should the network bridge to? 1
 ==> rtr1: Preparing network interfaces based on configuration...
     rtr1: Adapter 1: nat
     rtr1: Adapter 2: bridged
@@ -126,21 +112,73 @@ Bringing machine 'rtr1' up with 'virtualbox' provider...
     rtr1: SSH address: 127.0.0.1:2201
     rtr1: SSH username: vagrant
     rtr1: SSH auth method: private key
-```diff
-- Timed out while waiting for the machine to boot. This means that
-- Vagrant was unable to communicate with the guest machine within
-- the configured ("config.vm.boot_timeout" value) time period.
 
-- If you look above, you should be able to see the error(s) that
-- Vagrant had when attempting to connect to the machine. These errors
-- are usually good hints as to what may be wrong.
+Timed out while waiting for the machine to boot. This means that
+Vagrant was unable to communicate with the guest machine within
+the configured ("config.vm.boot_timeout" value) time period.
 
-- If you're using a custom box, make sure that networking is properly
-- working and you're able to connect to the machine. It is a common
-- problem that networking isn't setup properly in these boxes.
-- Verify that authentication configurations are also setup properly,
-- as well.
+If you look above, you should be able to see the error(s) that
+Vagrant had when attempting to connect to the machine. These errors
+are usually good hints as to what may be wrong.
 
-- If the box appears to be booting properly, you may want to increase
-- the timeout ("config.vm.boot_timeout") value. 
+If you're using a custom box, make sure that networking is properly
+working and you're able to connect to the machine. It is a common
+problem that networking isn't setup properly in these boxes.
+Verify that authentication configurations are also setup properly,
+as well.
+
+If the box appears to be booting properly, you may want to increase
+the timeout ("config.vm.boot_timeout") value. 
 ```
+If we type wrong localhost interface name for bridged network there will be option to choose form listed possibilities: 
+```bash
+==> rtr1: Specific bridge 'enp0s1: Ethernet' not found. You may be asked to specify
+==> rtr1: which network to bridge to.
+==> rtr1: Available bridged network interfaces:
+1) enp0s3
+2) docker0
+==> rtr1: When choosing an interface, it is usually the one that is
+==> rtr1: being used to connect to the internet.
+    rtr1: Which interface should the network bridge to?	
+    rtr1: Which interface should the network bridge to? 1
+```
+Now wait for end of csr booting, even 15 minutes. 
+Step 5:
+  Machines started by vagrant should be vissible in VirtualBox as new instances. 
+  Login to csr console via VirtualBox GUI and set basic ssh configuration to allow connections for vagrant and other remotes. 
+  ```bash
+  conf t
+  Router(config)#hostname rtr1
+  rtr1(config)#ip domain-name cisco.local
+  rtr1(config)#crypto key gen rsa mod 1024
+  rtr1(config)#ip ssh ver 2
+  rtr1(config)#username vagrant priv 15 secret vagrant
+  rtr1(config)#line vty 0 98
+  rtr1(config-line)#login local
+  rtr1(config-line)#transport input ssh
+```
+To connect to rtr1 via ssh use command: 
+```bash
+vagrant ssh rtr1
+```
+or linux host machine: 
+```bash
+ssh vagrant@127.0.0.1 -p 2201
+```
+If needed, add more CSR instances in Vagrantfile: 
+```bash
+config.vm.define "rtr2" do |rtr2|
+    rtr1.vm.box = "cisco-csr1000v-box" 
+    rtr1.vm.boot_timeout = 1 
+    rtr1.vm.hostname = "rtr2" 
+    rtr1.vm.network :forwarded_port, guest: 22, host: 2202, id: "ssh" 
+    rtr1.vm.network "public_network",use_dhcp_assigned_default_route: true, bridge: "enp0s3: Ethernet"
+    rtr1.vm.network "private_network", ip: "192.168.100.1"
+    rtr1.vm.network "private_network",  ip: "192.168.200.1"
+    rtr1.vm.provider "virtualbox" do |vb|
+      vb.name = "rtr1"
+      vb.memory = "3072"
+      vb.cpus = 2
+    end
+  end
+  ```
