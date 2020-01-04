@@ -16,15 +16,23 @@ Step 1:
   Start your machine point to csr iso image if not mounted before spinning it up in Settings > Storage. 
   Shut if down and be sure the iso image is unmounted form drive. 
 Step 2: 
-Make new directory for vagrant project for example: Vagrant in your Home directory for example and Vagrant/Boxes for package. 
+Make new directories, one for vagrant project and second for storing vagrant package Vagrant/Boxes for package. 
+```bash
+mkdir /home/adrian/Vagrant/
+mkdir /home/adrian/Vagrant/Boxes/
+```
 Type in shell: 
 ```bash
   vagrant package --base csr1000v --output /home/adrian/Vagrant/Boxes/
+```
+```bash
     ==> csr1000v: Exporting VM...
     ==> csr1000v: Compressing package to: /home/adrian/Vagrant/boxes/cisco-csr1000v
       (csr1000v is your machine name created in VirtualBox via GUI) 
-      
+```bash
   ll -h /home/adrian/Vagrant/boxes/ 
+```
+```bash
     total 1.1G
     drwxrwxr-x 2 adrian adrian 4.0K Jan  3 20:22 ./
     drwxrwxr-x 4 adrian adrian 4.0K Jan  3 22:45 ../
@@ -65,7 +73,7 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
-There are vagrant docs with explenations but here it is basic explanation to understand what happend: 
+There are vagrant docs with explanations but here it is, basic explanation to understand what happend: 
 ```ruby
 Vagrant.configure("2") do |config|
   
