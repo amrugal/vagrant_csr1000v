@@ -13,55 +13,56 @@ Step 1:
   Set Version: Other Linux (64-bit). 
   Choose Create virtual hard disk now > VDI (VIrtualBox Disk Image) > Fixed size > Default disk name and location > Size 8GB. 
   Right click on created csr machine > Settings... > Serial Ports > Thick Enable Serial Port > Port Mode: Disconnected. 
-  Start your machine point to csr iso image if not mounted before spinning it up in Settings > Storage. 
-  Shut if down and be sure the iso image is unmounted form drive. 
+  Start your machine and point to csr iso image if asked and not mounted before spinning it up in Settings > Storage. 
+  CSR1000v boot time can be long, 15 minutes for example. 
+  Shut it down and be sure the iso image is unmounted from optical drive. 
 Step 2: 
-Make new directories, one for vagrant project and second for storing vagrant package Vagrant/Boxes for package. 
-```bash
-  mkdir /home/adrian/Vagrant/
-  mkdir /home/adrian/Vagrant/Boxes/
-```
-Type in shell: 
-```bash
-  vagrant package --base csr1000v --output /home/adrian/Vagrant/Boxes/
-```
-output: 
-```bash
-  ==> csr1000v: Exporting VM...
-  ==> csr1000v: Compressing package to: /home/adrian/Vagrant/boxes/cisco-csr1000v
-```
-(csr1000v is your machine name created in VirtualBox via GUI) 
-  
-We can check file presence and size: 
-```bash
-  ll -h /home/adrian/Vagrant/boxes/ 
-```
-Vagrant package named cisco-csr1000v should be created: 
-```bash
-  total 1.1G
-  drwxrwxr-x 2 adrian adrian 4.0K Jan  3 20:22 ./
-  drwxrwxr-x 4 adrian adrian 4.0K Jan  3 22:45 ../
-  -rw-rw-r-- 1 adrian adrian 1.1G Jan  3 20:24 cisco-csr1000v
-```
- Then type: 
-```bash     
-  vagrant box add /home/adrian/Vagrant/boxes/cisco-csr1000v --name cisco-csr1000v-box
-```
-output: 
-```bash
-  ==> box: Box file was not detected as metadata. Adding it directly...
-  ==> box: Adding box 'cisco-csr1000b-box' (v0) for provider: 
-      box: Unpacking necessary files from: file:///home/adrian/Vagrant/boxes/cisco-csr1000v
-  ==> box: Successfully added box 'cisco-csr1000b-box' (v0) for 'virtualbox'!
-```
-```bash
-  vagrant box list
-```
-output: 
-```bash
-  cisco-csr1000v-box (virtualbox, 0)
-```
-(vagrant box should be created)
+  Make new directories, one for vagrant project and second for storing vagrant package Vagrant/Boxes for package. 
+  ```bash
+    mkdir /home/adrian/Vagrant/
+    mkdir /home/adrian/Vagrant/Boxes/
+  ```
+  Type in shell: 
+  ```bash
+    vagrant package --base csr1000v --output /home/adrian/Vagrant/Boxes/
+  ```
+  output: 
+  ```bash
+    ==> csr1000v: Exporting VM...
+    ==> csr1000v: Compressing package to: /home/adrian/Vagrant/boxes/cisco-csr1000v
+  ```
+  (csr1000v is your machine name created in VirtualBox via GUI) 
+
+  We can check file presence and size: 
+  ```bash
+    ll -h /home/adrian/Vagrant/boxes/ 
+  ```
+  Vagrant package named cisco-csr1000v should be created: 
+  ```bash
+    total 1.1G
+    drwxrwxr-x 2 adrian adrian 4.0K Jan  3 20:22 ./
+    drwxrwxr-x 4 adrian adrian 4.0K Jan  3 22:45 ../
+    -rw-rw-r-- 1 adrian adrian 1.1G Jan  3 20:24 cisco-csr1000v
+  ```
+   Then type: 
+  ```bash     
+    vagrant box add /home/adrian/Vagrant/boxes/cisco-csr1000v --name cisco-csr1000v-box
+  ```
+  output: 
+  ```bash
+    ==> box: Box file was not detected as metadata. Adding it directly...
+    ==> box: Adding box 'cisco-csr1000b-box' (v0) for provider: 
+        box: Unpacking necessary files from: file:///home/adrian/Vagrant/boxes/cisco-csr1000v
+    ==> box: Successfully added box 'cisco-csr1000b-box' (v0) for 'virtualbox'!
+  ```
+  ```bash
+    vagrant box list
+  ```
+  output: 
+  ```bash
+    cisco-csr1000v-box (virtualbox, 0)
+  ```
+  (vagrant box should be created)
 
 Step 3: 
     Now we need to create "Vagrantfile" in our project directory by creating it in any text editor or by typing in shell:
@@ -71,30 +72,10 @@ Step 3:
 Vagrant.configure("2") do |config|
   
   config.vm.define "rtr1" do |rtr1|
-    rtr1.vm.box = "cisco-csr1000v-box"
-    rtr1.vm.boot_timeout = 1
-    rtr1.vm.hostname = "rtr1"
-    rtr1.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
-    rtr1.vm.network "public_network",use_dhcp_assigned_default_route: true, bridge: "enp0s3: Ethernet"
-    rtr1.vm.network "private_network", ip: "192.168.100.1"
-    rtr1.vm.network "private_network",  ip: "192.168.200.1"
-    rtr1.vm.provider "virtualbox" do |vb|
-      vb.name = "rtr1"
-      vb.memory = "3072"
-      vb.cpus = 2
-    end
-  end
-end
-```
-There are vagrant docs with explanations but here it is, basic explanation to understand what happend: 
-```ruby
-Vagrant.configure("2") do |config|
-  
-  config.vm.define "rtr1" do |rtr1|
-    rtr1.vm.box = "cisco-csr1000v-box"
-    rtr1.vm.boot_timeout = 1
-    rtr1.vm.hostname = "rtr1"
-    rtr1.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
+    rtr1.vm.box = "cisco-csr1000v-box" #name of created vagrant package with csr1000v
+    rtr1.vm.boot_timeout = 1 #irrelevant, csr won't respond without ssh configuration and can spin for 15 minutes
+    rtr1.vm.hostname = "rtr1" #new csr name in VirtualBox instance
+    rtr1.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh" #ssh will be forwarded from 2201 port to 22
     rtr1.vm.network "public_network",use_dhcp_assigned_default_route: true, bridge: "enp0s3: Ethernet"
     rtr1.vm.network "private_network", ip: "192.168.100.1"
     rtr1.vm.network "private_network",  ip: "192.168.200.1"
