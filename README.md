@@ -54,6 +54,8 @@ Vagrant package named cisco-csr1000v should be created:
 ```
 ```bash
   vagrant box list
+```
+```bash
     cisco-csr1000v-box (virtualbox, 0)
 ```
 (vagrant box should be created)
