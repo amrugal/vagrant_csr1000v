@@ -39,7 +39,9 @@ Type in shell:
     drwxrwxr-x 4 adrian adrian 4.0K Jan  3 22:45 ../
     -rw-rw-r-- 1 adrian adrian 1.1G Jan  3 20:24 cisco-csr1000v 
 ```
- (vagrant package for csr should be created) 
+ (vagrant package named cisco-csr1000v should be created) 
+ 
+ Then type: 
 ```bash     
   vagrant box add /home/adrian/Vagrant/boxes/cisco-csr1000v --name cisco-csr1000v-box
     ==> box: Box file was not detected as metadata. Adding it directly...
