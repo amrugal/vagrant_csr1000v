@@ -29,9 +29,9 @@ Type in shell:
     ==> csr1000v: Exporting VM...
     ==> csr1000v: Compressing package to: /home/adrian/Vagrant/boxes/cisco-csr1000v
 ```
-  (csr1000v is your machine name created in VirtualBox via GUI) 
+(csr1000v is your machine name created in VirtualBox via GUI) 
   
-  
+We can check file presence and size: 
 ```bash
   ll -h /home/adrian/Vagrant/boxes/ 
 ```
