@@ -1,7 +1,7 @@
 # vagrant_csr1000v
 Spinning csr1000v router using vagrant with virtualbox as provisioner. 
 
-Whate we need:
+What we need:
   - csr1000v iso image.
   - installed vagrant
   - installed virtual box
@@ -30,6 +30,7 @@ Type in shell:
     ==> csr1000v: Compressing package to: /home/adrian/Vagrant/boxes/cisco-csr1000v
 ```
   (csr1000v is your machine name created in VirtualBox via GUI) 
+  
 ```bash
   ll -h /home/adrian/Vagrant/boxes/ 
 ```
