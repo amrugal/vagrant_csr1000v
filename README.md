@@ -7,15 +7,20 @@ What we need:
   - installed virtual box
 
 Step 1:
-  In virtualbox gui click new machine.\
-  Set Name: csr1000v (for example). \
-  Set Type: Linux. \
-  Set Version: Other Linux (64-bit). \
-  Choose Create virtual hard disk now > VDI (VIrtualBox Disk Image) > Fixed size > Default disk name and location > Size 8GB.\ 
-  Right click on created csr machine > Settings... > Serial Ports > Thick Enable Serial Port > Port Mode: Disconnected. \
-  Start your machine and point to csr iso image if asked and not mounted before spinning it up in Settings > Storage. \
-  CSR1000v boot time can be long, 15 minutes for example. \
-  Shut it down and be sure the iso image is unmounted from optical drive. \
+  #In virtualbox gui click new machine.\
+  #Set Name: csr1000v (for example). \
+  #Set Type: Linux. \
+  #Set Version: Other Linux (64-bit). \
+  \
+  #Choose Create virtual hard disk now > VDI (VIrtualBox Disk Image) > Fixed size > Default disk name and location > Size 8GB.\
+  \
+  #Right click on created csr machine > Settings... > Serial Ports > Thick Enable Serial Port > Port Mode: Disconnected. \
+  \
+  #Start your machine and point to csr iso image if asked and not mounted before spinning it up in Settings > Storage. \
+  \
+  #CSR1000v boot time can be long, 15 minutes for example. \
+  \
+  #Shut it down and be sure the iso image is unmounted from optical drive. \
   \
 Step 2: 
   Make new directories, one for vagrant project and second for storing vagrant package Vagrant/Boxes for package. 
