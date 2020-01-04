@@ -45,10 +45,14 @@ Vagrant package named cisco-csr1000v should be created:
  Then type: 
 ```bash     
   vagrant box add /home/adrian/Vagrant/boxes/cisco-csr1000v --name cisco-csr1000v-box
+```
+```bash
     ==> box: Box file was not detected as metadata. Adding it directly...
     ==> box: Adding box 'cisco-csr1000b-box' (v0) for provider: 
         box: Unpacking necessary files from: file:///home/adrian/Vagrant/boxes/cisco-csr1000v
     ==> box: Successfully added box 'cisco-csr1000b-box' (v0) for 'virtualbox'!
+```
+```bash
   vagrant box list
     cisco-csr1000v-box (virtualbox, 0)
 ```
