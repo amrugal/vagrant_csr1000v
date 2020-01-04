@@ -31,6 +31,7 @@ Type in shell:
 ```
   (csr1000v is your machine name created in VirtualBox via GUI) 
   
+  
 ```bash
   ll -h /home/adrian/Vagrant/boxes/ 
 ```
