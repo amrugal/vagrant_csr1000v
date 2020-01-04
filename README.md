@@ -7,10 +7,10 @@ What we need:
   - installed virtual box
 
 Step 1:
-  In virtualbox gui click new machine.
-  Set Name: csr1000v (for example). 
-  Set Type: Linux. 
-  Set Version: Other Linux (64-bit). 
+  In virtualbox gui click new machine.\
+  Set Name: csr1000v (for example). \
+  Set Type: Linux. \
+  Set Version: Other Linux (64-bit). \
   Choose Create virtual hard disk now > VDI (VIrtualBox Disk Image) > Fixed size > Default disk name and location > Size 8GB. 
   Right click on created csr machine > Settings... > Serial Ports > Thick Enable Serial Port > Port Mode: Disconnected. 
   Start your machine and point to csr iso image if asked and not mounted before spinning it up in Settings > Storage. 
