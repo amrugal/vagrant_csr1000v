@@ -16,6 +16,7 @@ Step 1:
   Start your machine and point to csr iso image if asked and not mounted before spinning it up in Settings > Storage. \
   CSR1000v boot time can be long, 15 minutes for example. \
   Shut it down and be sure the iso image is unmounted from optical drive. \
+  \
 Step 2: 
   Make new directories, one for vagrant project and second for storing vagrant package Vagrant/Boxes for package. 
   ```bash
